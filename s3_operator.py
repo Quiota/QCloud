@@ -57,12 +57,13 @@ class S3Operator(object):
         select_files = []
         for root, dirs, filenames in os.walk(local_path):
             for filename in filenames:
-              local_file_path = os.path.join(root, filename)
-              select_files.append(local_file_path)
+                local_file_path = os.path.join(root.replace(local_path, ''), 
+                    filename)
+                select_files.append(local_file_path.lstrip('/'))
 
         for local_filename in select_files:
             cloud_filename = '{0}/{1}'.format(cloud_folder_name, 
-                local_filename.replace(local_path, ''))
+                local_filename)
             print 'uploading to bucket {0}'.format(select_bucket)
             print 'uploading to filename {0}'.format(cloud_filename)
             print 'uploading from {0}'.format(local_filename)
