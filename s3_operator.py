@@ -66,11 +66,13 @@ class S3Operator(object):
                 local_filename)
             print 'uploading to bucket {0}'.format(select_bucket)
             print 'uploading to filename {0}'.format(cloud_filename)
-            print 'uploading from {0}'.format(local_filename)
+            print 'uploading from {0}'.format(os.path.join(local_path, 
+                local_filename))
             
             # use STANDARD_IA for infrequent access files
-            self.client.upload_file(local_filename, select_bucket, 
-                cloud_filename, ExtraArgs={'StorageClass':cloud_storage_class})
+            self.client.upload_file(os.path.join(local_path, 
+                local_filename), select_bucket, cloud_filename, 
+            ExtraArgs={'StorageClass':cloud_storage_class})
         
     def download_multiple_files(self, select_files, local_path, select_bucket):
         # download multiple files
