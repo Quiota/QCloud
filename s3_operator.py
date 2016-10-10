@@ -61,7 +61,7 @@ class S3Operator(object):
                     filename)
                 select_files.append(local_file_path.lstrip('/'))
 
-        for local_filename in select_files:
+        for local_filename in sorted(select_files):
             cloud_filename = '{0}/{1}'.format(cloud_folder_name, 
                 local_filename)
             print 'uploading to bucket {0}'.format(select_bucket)
