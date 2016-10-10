@@ -1,8 +1,9 @@
 from s3_operator import S3Operator
+import getpass
 
 # input your credentials
-key_id = ''
-key = ''
+key_id = getpass.getpass('id:')
+key = getpass.getpass('key:')
 
 # declare obejct
 s3 = S3Operator(key_id, key)
